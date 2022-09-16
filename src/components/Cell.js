@@ -1,8 +1,13 @@
 import React from "react";
 
-const Cell = ({type, row, col}) => {
+const Cell = ({type, row, col, board}) => {
+    if (row == 31 && col == 31) {
+        type="cell-start";
+    }
+
+
     return (
-        <div className={type} row={row} col={col}></div>
+        <div className={type}></div>
     )
 }
 

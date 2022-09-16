@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import Cell from "./Cell";
+import {nanoid} from "nanoid"
 
 /*
     type = 'cell', 'cell-start', 'cell-curr', 'cell-end'
@@ -8,17 +9,17 @@ import Cell from "./Cell";
 */
 
 class Spot{
-    constructor(type, row, col) {
+    constructor(type, col, row) {
         this.type = type;
         this.row = row;
         this.col = col;
     }
 }
 
-// Initial board state on render
+// State on initial render
 
 function initBoard() {
-    let n = 32;
+    let n = 64;
     let arr = new Array(n)
 
     for(let i = 0; i < n; i++) {
@@ -36,17 +37,15 @@ function initBoard() {
 
 const Grid = () => { 
     const [board, setBoard] = useState(() => initBoard());
-
     return (
         <div className="grid-cont">
             <div className ="grid">
-                {board.map((spot) => (
-                    board.map((spot, index) => (
-                        <Cell type={spot[index].type} row={spot[index].row} col={spot[index].col}/>
-                    ))
+                {board.map((spot, index) => (
+                    board.map(spot => (
+                        <Cell key={nanoid()} type={spot[index].type} row={spot[index].row} col={spot[index].col} board={board}/>
+                    ))                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
                 ))}
             </div>
-            <button>START</button>
         </div>               
     )
 }

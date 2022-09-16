@@ -1,5 +1,5 @@
 :root {
-  --cell: 8px;
+  --cell: 10px;
 }
 
 body {
@@ -24,8 +24,7 @@ code {
 .cell {
   height: var(--cell);
   width: var(--cell);
-  background-color: white;
-  border: 1px solid;
+  background-color: rgb(231, 231, 231);
   margin: 0.5px;
   border-radius: 0px;
 }
@@ -34,7 +33,6 @@ code {
   height: var(--cell);
   width: var(--cell);
   background-color: rgb(118, 255, 118);
-  border: 1px solid;
   margin: 0.5px;
   border-radius: 0px;
 }
@@ -42,7 +40,7 @@ code {
 .cell-end {
   height: var(--cell);
   width: var(--cell);
-  border: 1px solid red;
+  background-color: rgb(255, 118, 118);
   margin: 0.5px;
   border-radius: 0px;
 }
@@ -51,7 +49,7 @@ code {
   height: var(--cell);
   width: var(--cell);
   background-color: blue;
-  border: 1px solid;
+
   margin: 0.5px;
   border-radius: 0px;
 }
