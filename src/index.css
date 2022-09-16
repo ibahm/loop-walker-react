@@ -1,3 +1,7 @@
+:root {
+  --cell: 8px;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -7,7 +11,69 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.container {
+  width: 100vw;
+  margin: 0;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.cell {
+  height: var(--cell);
+  width: var(--cell);
+  background-color: white;
+  border: 1px solid;
+  margin: 0.5px;
+  border-radius: 0px;
+}
+
+.cell-start {
+  height: var(--cell);
+  width: var(--cell);
+  background-color: rgb(118, 255, 118);
+  border: 1px solid;
+  margin: 0.5px;
+  border-radius: 0px;
+}
+
+.cell-end {
+  height: var(--cell);
+  width: var(--cell);
+  border: 1px solid red;
+  margin: 0.5px;
+  border-radius: 0px;
+}
+
+.cell-current {
+  height: var(--cell);
+  width: var(--cell);
+  background-color: blue;
+  border: 1px solid;
+  margin: 0.5px;
+  border-radius: 0px;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 500px;
+  max-width: 705px;
+}
+
+.grid-cont {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+
+.start {
+  padding: 8px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  background-color: lightgrey;
 }
