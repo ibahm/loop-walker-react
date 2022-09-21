@@ -1,5 +1,5 @@
 :root {
-  --cell: 10px;
+  --cell: 12px;
 }
 
 body {
@@ -49,22 +49,21 @@ code {
   height: var(--cell);
   width: var(--cell);
   background-color: blue;
-
   margin: 0.5px;
   border-radius: 0px;
-}
-
-.grid {
-  display: flex;
-  flex-wrap: wrap;
-  min-width: 500px;
-  max-width: 705px;
 }
 
 .grid-cont {
   display: flex;
   justify-content: center;
-  margin: 10px;
+  flex-direction: column;
+  border: 1px solid firebrick;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(64, 1fr);
+  border: 1px solid;
 }
 
 .start {
@@ -72,6 +71,15 @@ code {
   font-size: 16px;
   border: none;
   border-radius: 2px;
+  width: 150px;
   cursor: pointer;
   background-color: lightgrey;
+}
+
+.start:hover {
+  background-color: rgb(155, 155, 155);
+}
+
+.start:active {
+  scale: 0.95;
 }

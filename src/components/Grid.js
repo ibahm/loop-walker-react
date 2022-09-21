@@ -3,31 +3,37 @@ import Cell from "./Cell";
 import {nanoid} from "nanoid"
 
 /*
+    Global variables
+    Update css grid when changing BOARD_SIZE
+*/
+
+const BOARD_SIZE = 64;
+
+/*
     type = 'cell', 'cell-start', 'cell-curr', 'cell-end'
     row = i index
     col = j index
 */
 
 class Spot{
-    constructor(type, col, row) {
-        this.type = type;
-        this.row = row;
-        this.col = col;
+    constructor(type, row, col) {
+        this.type = type;   // 'cell', 'cell-start', 'cell-curr', 'cell-end'
+        this.row = row; // i index
+        this.col = col; // j index
     }
 }
 
 // State on initial render
 
 function initBoard() {
-    let n = 64;
-    let arr = new Array(n)
+    let arr = new Array(BOARD_SIZE)
 
-    for(let i = 0; i < n; i++) {
-        arr[i] = new Array(n);
+    for(let i = 0; i < BOARD_SIZE; i++) {
+        arr[i] = new Array(BOARD_SIZE);
     }
     
-    for(let i = 0; i < n; i++) {
-       for(let j = 0; j < n; j++) {
+    for(let i = 0; i < BOARD_SIZE; i++) {
+       for(let j = 0; j < BOARD_SIZE; j++) {
         arr[i][j] = new Spot("cell", i, j);
        }
     }
@@ -37,6 +43,14 @@ function initBoard() {
 
 const Grid = () => { 
     const [board, setBoard] = useState(() => initBoard());
+
+    // Always render the most middle cell as green
+
+    if (board[BOARD_SIZE/2][BOARD_SIZE/2].type !== "cell-start") {
+        board[BOARD_SIZE/2][BOARD_SIZE/2].type="cell-start"
+        setBoard([...board])
+    }
+
     return (
         <div className="grid-cont">
             <div className ="grid">
@@ -46,6 +60,7 @@ const Grid = () => {
                     ))                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
                 ))}
             </div>
+            <button className="start">START</button>
         </div>               
     )
 }

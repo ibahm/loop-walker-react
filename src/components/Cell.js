@@ -1,11 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
+import Grid from "./Grid";
 
 const Cell = ({type, row, col, board}) => {
-    if (row == 31 && col == 31) {
-        type="cell-start";
-    }
-
-
     return (
         <div className={type}></div>
     )
