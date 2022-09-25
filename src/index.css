@@ -32,7 +32,7 @@ code {
 .cell-start {
   height: var(--cell);
   width: var(--cell);
-  background-color: rgb(118, 255, 118);
+  background-color: rgb(128, 253, 128);
   margin: 0.5px;
   border-radius: 0px;
 }
@@ -40,7 +40,7 @@ code {
 .cell-end {
   height: var(--cell);
   width: var(--cell);
-  background-color: rgb(255, 118, 118);
+  background-color: rgb(255, 128, 128);
   margin: 0.5px;
   border-radius: 0px;
 }
@@ -51,7 +51,7 @@ code {
   background-color: rgb(231, 231, 231);
   margin: 0.5px;
   border-radius: 0px;
-  border: 1px solid rgb(118, 118, 255);
+  border: 1px solid rgb(128, 128, 255);
 }
 
 .grid-cont {
