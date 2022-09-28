@@ -4,8 +4,6 @@ import Cell from "./Cell";
 // Global variables
 // Replace these with state variables 
 const BOARD_SIZE = 48;
-let CURR_CELL;
-let PREV_CELL;
 
 class Spot{
     constructor(type, row, col) {
@@ -39,12 +37,14 @@ const Grid = () => {
     const [board, setBoard] = useState(() => initBoard());
     const [path, setPath] = useState([]);
     const [count, setCount] = useState(0);
+    const [curr, setCurr] = useState(board[BOARD_SIZE/2][BOARD_SIZE/2]);
+    const [prev, setPrev] = useState(board[BOARD_SIZE/2][BOARD_SIZE/2]);
 
     // Initialise the path state
 
     useEffect(() => {
         if (!(path.length > 0)) {
-            for(let i = 0; i < 5; i++) {
+            for(let i = 0; i < 1000; i++) {
                 setPath((pState) => [...pState, Math.floor(Math.random(0)*4)])
             }
         }
@@ -56,11 +56,11 @@ const Grid = () => {
         if (anim) {
             const timer = setInterval(() => {
                 setCount(pState => pState + 1)
-            }, 500)
+                updateCell(count, path)
+            }, 100)
 
             if (count === path.length) {
                 clearInterval(timer)
-                handleReset()
             }
 
             return () => {
@@ -77,36 +77,36 @@ const Grid = () => {
     }
 
     const handleReset = () => {
-        setAnim((pState) => false)
+        setBoard(initBoard);
+        setAnim((pState) => false);
         setCount((pState) => 0);
+        setCurr((pState) => board[BOARD_SIZE/2][BOARD_SIZE/2])
+        setPrev((pState) => board[BOARD_SIZE/2][BOARD_SIZE/2])
     }
 
-    // Rewrite to use state variables instead of global variables
+    // Update the state variables for pathing
 
-    const updateCell = (array, i, path) => {
+    const updateCell = (i, path) => {
+        let arr = board;
         switch(path[i]) {
             case 0:
-                PREV_CELL = CURR_CELL
-                CURR_CELL = array[CURR_CELL.row-1][CURR_CELL.col]
+                setCurr((pState) => arr[curr.row-1][curr.col])
                 break;
             case 1:
-                PREV_CELL = CURR_CELL
-                CURR_CELL = array[CURR_CELL.row+1][CURR_CELL.col]
+                setCurr((pState) => arr[curr.row+1][curr.col])
                 break;
             case 2:
-                PREV_CELL = CURR_CELL
-                CURR_CELL = array[CURR_CELL.row][CURR_CELL.col+1]
+                setCurr((pState) => arr[curr.row][curr.col+1])
                 break;
             case 3:
-                PREV_CELL = CURR_CELL
-                CURR_CELL = array[CURR_CELL.row][CURR_CELL.col-1]
+                setCurr((pState) => arr[curr.row][curr.col-1])
                 break;
         }
-        CURR_CELL.type="cell-current"
-        CURR_CELL.visited += 1;
-        PREV_CELL.type="cell-end"
-
-        return array;
+        setPrev((pState) => curr)
+        curr.type="cell-current"
+        curr.visited += 1
+        prev.type="cell-end"
+        return arr;
     }
 
     // Always render the most middle cell as green
