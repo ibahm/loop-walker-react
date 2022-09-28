@@ -63,6 +63,7 @@ const Grid = () => {
         }    
     }, [setCount, anim])
 
+    // Temp console output to see count iterations
     console.log(count);
 
     const handleStart = () => {
@@ -73,7 +74,7 @@ const Grid = () => {
         setCount(0);
     }
 
-    // Rewrite to use state variables
+    // Rewrite to use state variables instead of global variables
 
     const updateCell = (array, i, path) => {
         switch(path[i]) {
