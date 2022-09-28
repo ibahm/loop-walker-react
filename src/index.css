@@ -56,24 +56,32 @@ code {
 
 .grid-cont {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   margin: 1em;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(64, 1fr);
-  border: 2px dashed firebrick;
+  width: fit-content;
+  border: 2px dashed grey;
+}
+
+.grid-footer{
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .start {
-  padding: 8px 20px;
-  margin-left: 1em;
-  font-size: 16px;
+  font-size: 12px;
+  margin-right: 1em;
+  margin-top: 1em;
   border: none;
   border-radius: 2px;
-  width: 150px;
-  height: 50px;
+  width: 70px;
+  height: 25px;
   cursor: pointer;
   background-color: lightgrey;
 }
@@ -83,5 +91,25 @@ code {
 }
 
 .start:active {
+  scale: 0.95;
+}
+
+.reset {
+  font-size: 12px;
+  margin-right: 1em;
+  margin-top: 1em;
+  border: none;
+  border-radius: 2px;
+  width: 70px;
+  height: 25px;
+  cursor: pointer;
+  background-color: lightgrey;
+}
+
+.reset:hover {
+  background-color: rgb(155, 155, 155);
+}
+
+.reset:active {
   scale: 0.95;
 }

@@ -1,31 +1,23 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Cell from "./Cell";
-import {nanoid} from "nanoid"
 
 // Global variables
-
 const BOARD_SIZE = 64;
-const PATH_SPEED = 200;
-let CURR_CELL = null;
-let PREV_CELL = null;
-
-/*
-    type = 'cell', 'cell-start', 'cell-current', 'cell-end'
-    row = i index
-    col = j index
-*/
+let CURR_CELL;
+let PREV_CELL;
 
 class Spot{
     constructor(type, row, col) {
         this.type = type;   // 'cell', 'cell-start', 'cell-curr', 'cell-end'
-        this.row = row; // i index
-        this.col = col; // j index
+        this.row = row;     // i index
+        this.col = col;     // j index
+        this.visited = 0  
     }
 }
 
-// State on initial render
+// Initialise the board state on initial render
 
-function initBoard() {
+const initBoard = () => {
     let arr = new Array(BOARD_SIZE)
 
     for(let i = 0; i < BOARD_SIZE; i++) {
@@ -41,57 +33,72 @@ function initBoard() {
     return arr;
 }
 
-// Update visited cell
-
-function updateCell(array, i, path) {
-    switch(path[i]) {
-        case 0:
-            PREV_CELL = CURR_CELL
-            CURR_CELL = array[CURR_CELL.row-1][CURR_CELL.col]
-            break;
-        case 1:
-            PREV_CELL = CURR_CELL
-            CURR_CELL = array[CURR_CELL.row+1][CURR_CELL.col]
-            break;
-        case 2:
-            PREV_CELL = CURR_CELL
-            CURR_CELL = array[CURR_CELL.row][CURR_CELL.col+1]
-            break;
-        case 3:
-            PREV_CELL = CURR_CELL
-            CURR_CELL = array[CURR_CELL.row][CURR_CELL.col-1]
-            break;
-    }
-    CURR_CELL.type="cell-current"
-    PREV_CELL.type="cell-end"
-
-    return array;
-}
-
-const Grid = () => { 
+const Grid = () => {
+    const [anim, setAnim] = useState(false); 
     const [board, setBoard] = useState(() => initBoard());
+    const [path, setPath] = useState([]);
+    const [count, setCount] = useState(0);
 
-    function beginPath() {
-        let path = new Array();
-        CURR_CELL = board[BOARD_SIZE/2][BOARD_SIZE/2]
+    // Initialise the path state
 
-        for(let i = 0; i < 1000; i++) {
-            path.push(Math.floor(Math.random(0)*4))
-        }
-
-        // Call function in interval
-        
-        let i = 0;
-        let interval = setInterval(() => {
-            
-            setBoard([...updateCell(board, i, path)])
-
-            console.log(path[i++]);
-            
-            if(i === path.length){
-                clearInterval(interval);
+    useEffect(() => {
+        if (!(path.length > 0)) {
+            for(let i = 0; i < 100; i++) {
+                setPath((pState) => [...pState, Math.floor(Math.random(0)*4)])
             }
-        }, PATH_SPEED)
+        }
+    }, [])
+
+    // useEffect and setInterval to iterate count every n milliseconds anim is true
+
+    useEffect(() => {
+        if (anim) {
+            const timer = setInterval(() => {
+                setCount(pState => pState + 1)
+            }, 500)
+
+            return () => {
+                clearInterval(timer)
+            }
+        }    
+    }, [setCount, anim])
+
+    console.log(count);
+
+    const handleStart = () => {
+        setAnim(pState => !pState)
+    }
+
+    const handleReset = () => {
+        setCount(0);
+    }
+
+    // Rewrite to use state variables
+
+    const updateCell = (array, i, path) => {
+        switch(path[i]) {
+            case 0:
+                PREV_CELL = CURR_CELL
+                CURR_CELL = array[CURR_CELL.row-1][CURR_CELL.col]
+                break;
+            case 1:
+                PREV_CELL = CURR_CELL
+                CURR_CELL = array[CURR_CELL.row+1][CURR_CELL.col]
+                break;
+            case 2:
+                PREV_CELL = CURR_CELL
+                CURR_CELL = array[CURR_CELL.row][CURR_CELL.col+1]
+                break;
+            case 3:
+                PREV_CELL = CURR_CELL
+                CURR_CELL = array[CURR_CELL.row][CURR_CELL.col-1]
+                break;
+        }
+        CURR_CELL.type="cell-current"
+        CURR_CELL.visited += 1;
+        PREV_CELL.type="cell-end"
+
+        return array;
     }
 
     // Always render the most middle cell as green
@@ -104,14 +111,23 @@ const Grid = () => {
     return (
         <>
             <div className="grid-cont">
-                <div className ="grid">
+                <div className ="grid" style={{gridTemplateColumns: `repeat(${BOARD_SIZE}, 1fr)`}}>
                     {board.map((spot, index) => (
                         board.map(spot => (
-                            <Cell key={nanoid()} type={spot[index].type} row={spot[index].row} col={spot[index].col} board={board}/>
+                            <Cell
+                            key={`[${spot[index].col}][${spot[index].row}]`} 
+                            type={spot[index].type} 
+                            row={spot[index].row} 
+                            col={spot[index].col} 
+                            board={board} 
+                            visited={spot[index].visited}/>
                         ))                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
                     ))}
                 </div>
-                <button className="start" onClick={beginPath}>START</button>
+                <div className="grid-footer">
+                    <button className="start" onClick={handleStart}>Start/Stop</button>
+                    <button className="reset" onClick={handleReset}>Reset</button>
+                </div>
             </div>
         </>                   
     )

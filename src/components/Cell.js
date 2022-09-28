@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 import Grid from "./Grid";
 
-const Cell = ({type, row, col, board}) => {
+const Cell = ({type, visited}) => {
     return (
-        <div className={type}></div>
+        <div className={type} style={type === "cell-end" ? {backgroundColor: `rgb(255, 100, 100,${0.2 * visited})`} : null}></div>
     )
 }
 
