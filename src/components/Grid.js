@@ -2,7 +2,8 @@ import React, {useEffect, useState} from "react";
 import Cell from "./Cell";
 
 // Global variables
-const BOARD_SIZE = 64;
+// Replace these with state variables 
+const BOARD_SIZE = 48;
 let CURR_CELL;
 let PREV_CELL;
 
@@ -43,7 +44,7 @@ const Grid = () => {
 
     useEffect(() => {
         if (!(path.length > 0)) {
-            for(let i = 0; i < 100; i++) {
+            for(let i = 0; i < 5; i++) {
                 setPath((pState) => [...pState, Math.floor(Math.random(0)*4)])
             }
         }
@@ -57,11 +58,16 @@ const Grid = () => {
                 setCount(pState => pState + 1)
             }, 500)
 
+            if (count === path.length) {
+                clearInterval(timer)
+                handleReset()
+            }
+
             return () => {
                 clearInterval(timer)
             }
         }    
-    }, [setCount, anim])
+    }, [anim, count])
 
     // Temp console output to see count iterations
     console.log(count);
@@ -71,7 +77,8 @@ const Grid = () => {
     }
 
     const handleReset = () => {
-        setCount(0);
+        setAnim((pState) => false)
+        setCount((pState) => 0);
     }
 
     // Rewrite to use state variables instead of global variables
@@ -126,8 +133,9 @@ const Grid = () => {
                     ))}
                 </div>
                 <div className="grid-footer">
-                    <button className="start" onClick={handleStart}>Start/Stop</button>
-                    <button className="reset" onClick={handleReset}>Reset</button>
+                    <button className="footer-button" onClick={handleStart} style={{backgroundColor: anim ? `rgb(0, 210, 18, 0.70)` : `rgb(255, 128, 128)`}}>Start/Stop</button>
+                    <button className="footer-button" onClick={handleReset}>Clear</button>
+                    <button className="footer-button">New Path</button>
                 </div>
             </div>
         </>                   

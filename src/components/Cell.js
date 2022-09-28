@@ -1,5 +1,4 @@
-import React, {useState} from "react";
-import Grid from "./Grid";
+import React from "react";
 
 const Cell = ({type, visited}) => {
     return (
