@@ -40,26 +40,59 @@ const Grid = () => {
     const [curr, setCurr] = useState(board[BOARD_SIZE/2][BOARD_SIZE/2]);
     const [prev, setPrev] = useState(board[BOARD_SIZE/2][BOARD_SIZE/2]);
 
-    // Initialise the path state
+    // Create a valid path (even number of steps)
+    // recursive function
+    const validPath = () => {
+        let valid = false;
+        let arr = []
+        let size = Math.floor(Math.random() * 1000 / 2) * 2; // random even number
+        let x = 0;
+        let y = 0;
 
-    useEffect(() => {
-        if (!(path.length > 0)) {
-            for(let i = 0; i < 1000; i++) {
-                setPath((pState) => [...pState, Math.floor(Math.random(0)*4)])
+        if (!valid) {
+            for( let i = 0; i < size; i++) {
+                switch(Math.floor(Math.random(0)*4)) {
+                    case 0:
+                        y -= 1;
+                        arr[i] = 0;
+                        break;
+                    case 1:
+                        y += 1; 
+                        arr[i] = 1;
+                        break;
+                    case 2:
+                        x -= 1; 
+                        arr[i] = 2;
+                        break;
+                    case 3:
+                        x += 1; 
+                        arr[i] = 3;
+                        break;  
+                } 
+            }
+
+            if (x === 0 && y === 0) {
+                valid = true
+                setPath((pState) => [...arr])
+                console.log(`x: ${x}, y: ${y}, valid: ${valid}, size: ${path.length}, path: ${path}`)
+            } else {
+                validPath()
             }
         }
-    }, [])
+    }
 
-    // useEffect and setInterval to iterate count every n milliseconds anim is true
+    // useEffect and setInterval to iterate count every n milliseconds on condition
 
     useEffect(() => {
         if (anim) {
             const timer = setInterval(() => {
+                //test
+                console.log(count)
                 setCount(pState => pState + 1)
                 updateCell(count, path)
-            }, 100)
+            }, 200)
 
-            if (count === path.length) {
+            if (count > path.length) {
                 clearInterval(timer)
             }
 
@@ -68,9 +101,6 @@ const Grid = () => {
             }
         }    
     }, [anim, count])
-
-    // Temp console output to see count iterations
-    console.log(count);
 
     const handleStart = () => {
         setAnim(pState => !pState)
@@ -82,6 +112,11 @@ const Grid = () => {
         setCount((pState) => 0);
         setCurr((pState) => board[BOARD_SIZE/2][BOARD_SIZE/2])
         setPrev((pState) => board[BOARD_SIZE/2][BOARD_SIZE/2])
+    }
+
+    const handlePath = () => {
+        handleReset()
+        validPath()
     }
 
     // Update the state variables for pathing
@@ -96,10 +131,10 @@ const Grid = () => {
                 setCurr((pState) => arr[curr.row+1][curr.col])
                 break;
             case 2:
-                setCurr((pState) => arr[curr.row][curr.col+1])
+                setCurr((pState) => arr[curr.row][curr.col-1])
                 break;
             case 3:
-                setCurr((pState) => arr[curr.row][curr.col-1])
+                setCurr((pState) => arr[curr.row][curr.col+1])
                 break;
         }
         setPrev((pState) => curr)
@@ -135,7 +170,7 @@ const Grid = () => {
                 <div className="grid-footer">
                     <button className="footer-button" onClick={handleStart} style={{backgroundColor: anim ? `rgb(0, 210, 18, 0.70)` : `rgb(255, 128, 128)`}}>Start/Stop</button>
                     <button className="footer-button" onClick={handleReset}>Clear</button>
-                    <button className="footer-button">New Path</button>
+                    <button className="footer-button" onClick={handlePath}>New Path</button>
                 </div>
             </div>
         </>                   

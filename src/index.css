@@ -40,7 +40,7 @@ code {
 .cell-end {
   height: var(--cell);
   width: var(--cell);
-  background-color: rgb(255, 128, 128);
+  background-color: rgb(255, 255, 255);
   border: 1px solid grey;
   border-radius: 0px;
 }
@@ -50,7 +50,7 @@ code {
   width: var(--cell) - 1px;
   background-color: rgb(231, 231, 231);
   border-radius: 0px;
-  border: 1px solid rgb(128, 128, 255);
+  border: 1px solid rgb(68, 68, 255);
 }
 
 .grid-cont {
