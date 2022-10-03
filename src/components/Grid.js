@@ -39,47 +39,50 @@ const Grid = () => {
     const [count, setCount] = useState(0);
     const [curr, setCurr] = useState(board[BOARD_SIZE/2][BOARD_SIZE/2]);
     const [prev, setPrev] = useState(board[BOARD_SIZE/2][BOARD_SIZE/2]);
+    const [valid, setValid] = useState(false);
 
     // Create a valid path (even number of steps)
-    // recursive function
-    const validPath = () => {
-        let valid = false;
-        let arr = []
-        let size = Math.floor(Math.random() * 1000 / 2) * 2; // random even number
-        let x = 0;
-        let y = 0;
+    // O(n^3) 
+    // Inefficient system
+    useEffect(() => {
+            if (!valid) {
+                const timer = setInterval(() => {
+                    let x = 0
+                    let y = 0
+                    let arr = []
+                    for(let i = 0; i < Math.floor(Math.random() * 1000 / 2) * 2 + 50; i++) {
+                        switch (Math.floor(Math.random(0)*4)) {
+                            case 0:
+                                y -= 1;
+                                arr[i] = 0;
+                                break;
+                            case 1:
+                                y += 1;
+                                arr[i] = 1;
+                                break;
+                            case 2:
+                                x -= 1;
+                                arr[i] = 2;
+                                break;
+                            case 3:
+                                x += 1;
+                                arr[i] = 3;
+                                break;
+                        }
+                    }
+                    if (x === 0 && y === 0) {
+                        setValid((pState) => !valid)
+                        setPath((pState) => [...arr])
+                        clearInterval(timer)
+                    }
 
-        if (!valid) {
-            for( let i = 0; i < size; i++) {
-                switch(Math.floor(Math.random(0)*4)) {
-                    case 0:
-                        y -= 1;
-                        arr[i] = 0;
-                        break;
-                    case 1:
-                        y += 1; 
-                        arr[i] = 1;
-                        break;
-                    case 2:
-                        x -= 1; 
-                        arr[i] = 2;
-                        break;
-                    case 3:
-                        x += 1; 
-                        arr[i] = 3;
-                        break;  
-                } 
-            }
-
-            if (x === 0 && y === 0) {
-                valid = true
-                setPath((pState) => [...arr])
-                console.log(`x: ${x}, y: ${y}, valid: ${valid}, size: ${path.length}, path: ${path}`)
-            } else {
-                validPath()
-            }
+                    return () => {
+                        clearInterval(timer)
+                    }
+            }, 1)  
         }
-    }
+        console.log(`valid: ${valid}, size: ${path.length}, path: ${path}`)
+    }, [path, valid])
 
     // useEffect and setInterval to iterate count every n milliseconds on condition
 
@@ -88,9 +91,10 @@ const Grid = () => {
             const timer = setInterval(() => {
                 //test
                 console.log(count)
+                //
                 setCount(pState => pState + 1)
                 updateCell(count, path)
-            }, 200)
+            }, 50)
 
             if (count > path.length) {
                 clearInterval(timer)
@@ -100,7 +104,7 @@ const Grid = () => {
                 clearInterval(timer)
             }
         }    
-    }, [anim, count])
+    }, [anim, count, path])
 
     const handleStart = () => {
         setAnim(pState => !pState)
@@ -116,7 +120,7 @@ const Grid = () => {
 
     const handlePath = () => {
         handleReset()
-        validPath()
+        setValid((pState) => !valid)
     }
 
     // Update the state variables for pathing
