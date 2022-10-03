@@ -119,6 +119,10 @@ body {
   align-items: center;
 }
 
+h1 {
+  color: rgb(136, 128, 253);
+}
+
 .git-profile {
   padding: 10px;
   scale: 1.65;
