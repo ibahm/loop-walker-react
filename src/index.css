@@ -55,7 +55,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 1em;
+  margin-top: 10px;
 }
 
 .grid {
@@ -64,6 +64,7 @@ body {
   width: fit-content;
   border: 2px solid rgb(185, 185, 185);
   border-radius: 2px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px;
 }
 
 .grid-footer{
@@ -101,7 +102,7 @@ body {
   padding: 10px;
   width: 500px;
   height: fit-content;
-  border: 2px dashed black;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px;
 }
 
 .side-header {
@@ -109,6 +110,52 @@ body {
   justify-content: center;
   flex-direction: row;
   align-items: center;
+}
+
+.side-footer {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  align-items: center;
+}
+
+.git-profile {
+  padding: 10px;
+  scale: 1.65;
+  text-decoration: none;
+  color: rgb(136, 136, 136);
+  transition: all 0.1s ease 0s;
+}
+
+.git-repo {
+  padding: 10px;
+  scale: 1.65;
+  text-decoration: none;
+  color: rgb(136, 136, 136);
+  transition: all 0.1s ease 0s;
+}
+
+.contact {
+  padding: 10px;
+  scale: 1.65;
+  text-decoration: none;
+  color: rgb(136, 136, 136);
+  transition: all 0.1s ease 0s;
+}
+
+.contact:hover {
+  scale: 1.75;
+  color: rgb(136, 128, 253)
+}
+
+.git-repo:hover {
+  scale: 1.75;
+  color: rgb(136, 128, 253)
+}
+
+.git-profile:hover {
+  scale: 1.75;
+  color: rgb(136, 128, 253)
 }
 
 span {

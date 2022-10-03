@@ -1,4 +1,5 @@
 import React from "react";
+import {VscGithubAlt, VscMail, VscFolder} from "react-icons/vsc"
 
 const Guide = () => {
     return (
@@ -17,9 +18,16 @@ const Guide = () => {
             <span>
                 Enjoy 😄.
             </span> 
-              
+            <div className="side-footer">
+                <a href="https://github.com/ibahm" target="_blank" rel="noopener noreferrer">
+                        <VscGithubAlt className="git-profile"/>
+                </a>
+                <a href="https://github.com/ibahm/loop-walker-react" target="_blank" rel="noopener noreferrer">
+                        <VscFolder className="git-repo"/>
+                </a>
+                <a href="mailto:ahmed.ibraahm@gmail.com" className="contact"><VscMail/></a>
+            </div>
         </div>
     )
 }
-
 export default Guide;
