@@ -9,7 +9,7 @@ const Guide = () => {
                 <span className="emoji" role="img" aria-label="newspaper">📰</span>
             </div>
             <span>
-                If <b style={{color: "rgb(136, 128, 253)"}}>no data is found</b>, then <b style={{color: "rgb(136, 128, 253)"}}>click the 'New Path' button</b> to generate a valid array.
+                <b style={{color: "rgb(136, 128, 253)"}}>Click the 'New Path' button</b> to generate directions.
                 Wait for the algorithm to generate an array.
             </span>
             <span>
