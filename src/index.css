@@ -93,7 +93,7 @@ body {
   scale: 0.95;
 }
 
-.logs-container {
+.side-container {
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
@@ -104,7 +104,7 @@ body {
   border: 2px dashed black;
 }
 
-.logs-header {
+.side-header {
   display: flex;
   justify-content: center;
   flex-direction: row;
@@ -115,4 +115,9 @@ span {
   display: block;
   overflow-wrap: break-word;
   padding: 10px;
+  font-size: 16px;
+}
+
+.emoji {
+  scale: 1.3;
 }

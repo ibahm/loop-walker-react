@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import Grid from "./components/Grid";
 import Logs from "./components/Logs";
+import Guide from "./components/Guide";
 
 const App = () => {
   const [anim, setAnim] = useState(false);
@@ -27,6 +28,7 @@ const App = () => {
         path={path}
         setPath={setPath}
       />
+      <Guide/>
     </div>
   );
 }

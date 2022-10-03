@@ -81,8 +81,10 @@ const Grid = ({anim, setAnim, count, setCount, valid, setValid, visited, setVisi
     useEffect(() => {
         if (anim) {
             const timer = setInterval(() => {
-                setCount(pState => pState + 1)
-                updateCell(count, path)
+                if (path.length > 1) {
+                    setCount(pState => pState + 1)
+                    updateCell(count, path)
+                }    
             }, 50)
 
             if (count > path.length) {
@@ -105,6 +107,8 @@ const Grid = ({anim, setAnim, count, setCount, valid, setValid, visited, setVisi
         setCount((pState) => 0);
         setCurr((pState) => board[BOARD_SIZE/2][BOARD_SIZE/2])
         setPrev((pState) => board[BOARD_SIZE/2][BOARD_SIZE/2])
+        setVisited((pState) => [])
+        setPath((pState) => [])
     }
 
     const handlePath = () => {
@@ -118,20 +122,23 @@ const Grid = ({anim, setAnim, count, setCount, valid, setValid, visited, setVisi
         switch(path[i]) {
             case 0:
                 setCurr((pState) => arr[curr.row-1][curr.col])
+                setVisited((pState) => [...visited, `Left`])
                 break;
             case 1:
                 setCurr((pState) => arr[curr.row+1][curr.col])
+                setVisited((pState) => [...visited, `Right`])
                 break;
             case 2:
                 setCurr((pState) => arr[curr.row][curr.col-1])
+                setVisited((pState) => [...visited, `Up`])
                 break;
             case 3:
                 setCurr((pState) => arr[curr.row][curr.col+1])
+                setVisited((pState) => [...visited, `Down`])
                 break;
         }
         setPrev((pState) => curr)
         curr.type="cell-current"
-        setVisited((pState) => [...visited, `[${curr.col}][${curr.row}] `])
         curr.visited += 1
         prev.type="cell-end"
         return arr;
