@@ -13,11 +13,11 @@ const Guide = () => {
                 Wait for the algorithm to generate an array.
             </span>
             <span>
-                The <b style={{color: "rgb(136, 128, 253)"}}>array of directions</b> is what the algorithm reads. 
-                It finds the next cell to visit based on the element at the nth index. Think of it as a list of directions to turn.
+                The <b style={{color: "rgb(136, 128, 253)"}}>generated directions</b> is what the algorithm interprets as a route. 
+                It finds the next cell to visit based on the element at the nth index. Think of it as a list of directions to travel.
             </span>
             <span>
-                The <b style={{color: "rgb(136, 128, 253)"}}>route</b> is the relative direction the algorithm is moving in.
+                The <b style={{color: "rgb(136, 128, 253)"}}>route</b> is a readable version of directions.
             </span>
             <span>
             <b style={{color: "rgb(136, 128, 253)"}}>0 = left, 1 = right, 2 = up, 3 = down</b>
