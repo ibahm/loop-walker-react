@@ -20,7 +20,7 @@ const Guide = () => {
                 The <b style={{color: "rgb(136, 128, 253)"}}>route</b> is the relative direction the algorithm is moving in.
             </span>
             <span>
-            <b style={{color: "rgb(136, 128, 253)"}}>0 = left, 1 = right, 2 = down, 3 = up</b>
+            <b style={{color: "rgb(136, 128, 253)"}}>0 = left, 1 = right, 2 = up, 3 = down</b>
             </span>
             <span>
             <b style={{color: "rgb(136, 128, 253)"}}>Enjoy 😄</b>
