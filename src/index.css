@@ -82,12 +82,12 @@ body {
   min-width: 100px;
   height: 25px;
   cursor: pointer;
-  background-color: rgba(0, 210, 18, 0.50);
+  background-color: rgb(136, 128, 253);
   transition: all 0.1s ease 0s;
 }
 
 .footer-button:hover {
-  background-color: rgba(0, 210, 18, 0.70);
+  background-color: rgb(109, 98, 255);
 }
 
 .footer-button:active {
