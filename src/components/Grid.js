@@ -44,7 +44,7 @@ const Grid = ({anim, setAnim, count, setCount, valid, setValid, visited, setVisi
                     let x = 0
                     let y = 0
                     let arr = []
-                    for(let i = 0; i < Math.floor(Math.random() * 500 / 2) * 2 + 50; i++) {
+                    for(let i = 0; i < Math.floor(Math.random() * 500 / 2) * 2 + 150; i++) {
                         switch (Math.floor(Math.random(0)*4)) {
                             case 0:
                                 y -= 1;
@@ -122,19 +122,19 @@ const Grid = ({anim, setAnim, count, setCount, valid, setValid, visited, setVisi
         switch(path[i]) {
             case 0:
                 setCurr((pState) => arr[curr.row-1][curr.col])
-                setVisited((pState) => [...visited, `Left`])
+                setVisited((pState) => [...visited, ` Left`])
                 break;
             case 1:
                 setCurr((pState) => arr[curr.row+1][curr.col])
-                setVisited((pState) => [...visited, `Right`])
+                setVisited((pState) => [...visited, ` Right`])
                 break;
             case 2:
                 setCurr((pState) => arr[curr.row][curr.col-1])
-                setVisited((pState) => [...visited, `Up`])
+                setVisited((pState) => [...visited, ` Up`])
                 break;
             case 3:
                 setCurr((pState) => arr[curr.row][curr.col+1])
-                setVisited((pState) => [...visited, `Down`])
+                setVisited((pState) => [...visited, ` Down`])
                 break;
         }
         setPrev((pState) => curr)
