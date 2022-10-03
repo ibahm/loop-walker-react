@@ -9,18 +9,18 @@ const Guide = () => {
                 <span className="emoji" role="img" aria-label="newspaper">📰</span>
             </div>
             <span>
-                Before pressing start, make sure that the 'Array of directions' in logs is displaying an array.
                 If <b style={{color: "rgb(136, 128, 253)"}}>no data is found</b>, then <b style={{color: "rgb(136, 128, 253)"}}>click the 'New Path' button</b> to generate a valid array.
-            </span>
-            <span>
-                Always wait for an array of directions to be generated before pressing start.    
+                Wait for the algorithm to generate an array.
             </span>
             <span>
                 The <b style={{color: "rgb(136, 128, 253)"}}>array of directions</b> is what the algorithm reads. 
-                It finds the next cell to visit based on the element at the nth index.
+                It finds the next cell to visit based on the element at the nth index. Think of it as a list of directions to turn.
             </span>
             <span>
-                The <b style={{color: "rgb(136, 128, 253)"}}>route</b> is the relative direction the algorithm is moving to.
+                The <b style={{color: "rgb(136, 128, 253)"}}>route</b> is the relative direction the algorithm is moving in.
+            </span>
+            <span>
+            <b style={{color: "rgb(136, 128, 253)"}}>0 = left, 1 = right, 2 = down, 3 = up</b>
             </span>
             <span>
             <b style={{color: "rgb(136, 128, 253)"}}>Enjoy 😄</b>
