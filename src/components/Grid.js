@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import Cell from "./Cell";
 
 // Global variables
-// Replace these with state variables 
 const BOARD_SIZE = 48;
 
 class Spot{
@@ -15,7 +14,6 @@ class Spot{
 }
 
 // Initialise the board state on initial render
-
 const initBoard = () => {
     let arr = new Array(BOARD_SIZE)
 
@@ -32,25 +30,21 @@ const initBoard = () => {
     return arr;
 }
 
-const Grid = () => {
-    const [anim, setAnim] = useState(false); 
+const Grid = ({anim, setAnim, count, setCount, valid, setValid, visited, setVisited, path, setPath}) => {
     const [board, setBoard] = useState(() => initBoard());
-    const [path, setPath] = useState([]);
-    const [count, setCount] = useState(0);
     const [curr, setCurr] = useState(board[BOARD_SIZE/2][BOARD_SIZE/2]);
     const [prev, setPrev] = useState(board[BOARD_SIZE/2][BOARD_SIZE/2]);
-    const [valid, setValid] = useState(false);
 
     // Create a valid path (even number of steps)
     // O(n^3) 
-    // Inefficient system
+    // Inefficient function
     useEffect(() => {
             if (!valid) {
                 const timer = setInterval(() => {
                     let x = 0
                     let y = 0
                     let arr = []
-                    for(let i = 0; i < Math.floor(Math.random() * 1000 / 2) * 2 + 50; i++) {
+                    for(let i = 0; i < Math.floor(Math.random() * 500 / 2) * 2 + 50; i++) {
                         switch (Math.floor(Math.random(0)*4)) {
                             case 0:
                                 y -= 1;
@@ -81,17 +75,12 @@ const Grid = () => {
                     }
             }, 1)  
         }
-        console.log(`valid: ${valid}, size: ${path.length}, path: ${path}`)
     }, [path, valid])
 
     // useEffect and setInterval to iterate count every n milliseconds on condition
-
     useEffect(() => {
         if (anim) {
             const timer = setInterval(() => {
-                //test
-                console.log(count)
-                //
                 setCount(pState => pState + 1)
                 updateCell(count, path)
             }, 50)
@@ -124,7 +113,6 @@ const Grid = () => {
     }
 
     // Update the state variables for pathing
-
     const updateCell = (i, path) => {
         let arr = board;
         switch(path[i]) {
@@ -143,13 +131,13 @@ const Grid = () => {
         }
         setPrev((pState) => curr)
         curr.type="cell-current"
+        setVisited((pState) => [...visited, `[${curr.col}][${curr.row}] `])
         curr.visited += 1
         prev.type="cell-end"
         return arr;
     }
 
     // Always render the most middle cell as green
-
     if (board[BOARD_SIZE/2][BOARD_SIZE/2].type !== "cell-start") {
         board[BOARD_SIZE/2][BOARD_SIZE/2].type="cell-start"
         setBoard([...board])
