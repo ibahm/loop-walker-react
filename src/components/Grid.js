@@ -36,8 +36,8 @@ const Grid = ({anim, setAnim, count, setCount, valid, setValid, visited, setVisi
     const [prev, setPrev] = useState(board[BOARD_SIZE/2][BOARD_SIZE/2]);
 
     // Create a valid path (even number of steps)
-    // O(n^3) 
-    // Inefficient function
+    // O(n^2)
+    // Inefficient solution
     useEffect(() => {
             if (!valid) {
                 const timer = setInterval(() => {
